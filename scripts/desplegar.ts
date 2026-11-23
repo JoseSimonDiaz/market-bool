@@ -10,7 +10,7 @@ import {
   CONFIG,
   ENTORNO_PRODUCCION,
   PREFIJO_BASE_LOCAL,
-  SECRETO_DE_EJEMPLO,
+  secretoDeSesionValidoParaProduccion,
 } from '@/constantes/config';
 import { MENSAJES_DESPLIEGUE } from '@/constantes/mensajes';
 import { SALIDA_CON_ERROR, SALIDA_EXITOSA } from '@/constantes/scripts';
@@ -24,7 +24,7 @@ function exigirEntornoDeProduccionCompleto() {
   if (CONFIG.urlBaseDatos.startsWith(PREFIJO_BASE_LOCAL)) {
     throw new Error(MENSAJES_DESPLIEGUE.faltaBaseDeDatos);
   }
-  if (CONFIG.secretoSesion === SECRETO_DE_EJEMPLO) {
+  if (!secretoDeSesionValidoParaProduccion()) {
     throw new Error(MENSAJES_DESPLIEGUE.faltaSecretoDeSesion);
   }
 }

@@ -6,7 +6,6 @@ export default defineConfig({
   test: {
     include: ['pruebas/**/*.test.ts'],
     fileParallelism: false,
-    // Base propia para los tests: nunca toca local.db ni Turso.
     env: {
       DATABASE_URL: 'file:pruebas/prueba.db',
       SESSION_SECRET: 'secreto-de-pruebas-con-mas-de-32-caracteres',

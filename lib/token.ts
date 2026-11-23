@@ -1,6 +1,6 @@
 import { jwtVerify as verificarFirmaJwt, SignJWT as FirmadorJwt } from 'jose';
 import { z as zod } from 'zod';
-import { CONFIG } from '@/constantes/config';
+import { obtenerSecretoDeSesion } from '@/constantes/config';
 import { ROLES, type Rol } from '@/constantes/dominio';
 import {
   ALGORITMO_FIRMA_SESION,
@@ -9,7 +9,9 @@ import {
 
 export type SesionDelToken = { usuarioId: number; rol: Rol };
 
-const claveDeFirma = new TextEncoder().encode(CONFIG.secretoSesion);
+function claveDeFirma() {
+  return new TextEncoder().encode(obtenerSecretoDeSesion());
+}
 
 const esquemaContenidoDelToken = zod.object({
   sub: zod.coerce.number().int().positive(),
@@ -22,12 +24,12 @@ export function firmarToken({ usuarioId, rol }: SesionDelToken) {
     .setSubject(String(usuarioId))
     .setIssuedAt()
     .setExpirationTime(`${DURACION_SESION_SEGUNDOS}s`)
-    .sign(claveDeFirma);
+    .sign(claveDeFirma());
 }
 
 async function verificarToken(token: string) {
   try {
-    const { payload } = await verificarFirmaJwt(token, claveDeFirma, {
+    const { payload } = await verificarFirmaJwt(token, claveDeFirma(), {
       algorithms: [ALGORITMO_FIRMA_SESION],
     });
     return payload;
