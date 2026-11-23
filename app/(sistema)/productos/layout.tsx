@@ -1,5 +1,6 @@
-import { PestaniasProductos } from '@/componentes/dominio/productos/pestanias-productos';
+import { PestaniasDeNavegacion } from '@/componentes/comunes/pestanias-de-navegacion';
 import { Pila } from '@/componentes/primitivas';
+import { PESTANIAS_PRODUCTOS } from '@/constantes/navegacion';
 import type { RUTAS } from '@/constantes/rutas';
 
 export default function LayoutProductos({
@@ -7,7 +8,10 @@ export default function LayoutProductos({
 }: LayoutProps<typeof RUTAS.productos>) {
   return (
     <Pila espacio={6}>
-      <PestaniasProductos />
+      <PestaniasDeNavegacion
+        pestanias={PESTANIAS_PRODUCTOS}
+        descripcion="Secciones de productos"
+      />
       {children}
     </Pila>
   );

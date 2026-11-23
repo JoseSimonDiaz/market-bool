@@ -1,4 +1,4 @@
-import { MOVIMIENTO_STOCK, ROL } from '@/constantes/dominio';
+import { ESTADO_FACTURA, MOVIMIENTO_STOCK, ROL } from '@/constantes/dominio';
 
 export const VALOR_MINIMO_ENTERO = 0;
 export const PASO_ENTERO = 1;
@@ -26,6 +26,11 @@ export const VARIANTE_CONFIRMACION: Record<
 export const PRESENTACION_SEGUN_ESTADO = {
   activo: { gravedad: GRAVEDAD.irreversible, variante: 'destructive' },
   inactivo: { gravedad: GRAVEDAD.reversible, variante: 'outline' },
+} as const;
+
+export const VARIANTE_SEGUN_ESTADO_FACTURA = {
+  [ESTADO_FACTURA.emitida]: 'secondary',
+  [ESTADO_FACTURA.anulada]: 'destructive',
 } as const;
 
 export const VARIANTE_SEGUN_ROL = {

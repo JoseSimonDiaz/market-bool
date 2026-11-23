@@ -5,6 +5,7 @@ import { BotonEnviar } from '@/componentes/comunes/campos/boton-enviar';
 import { CampoAreaTexto } from '@/componentes/comunes/campos/campo-area-texto';
 import { CampoEntero } from '@/componentes/comunes/campos/campo-entero';
 import { CampoImporte } from '@/componentes/comunes/campos/campo-importe';
+import { CampoInterruptor } from '@/componentes/comunes/campos/campo-interruptor';
 import { CampoSeleccion } from '@/componentes/comunes/campos/campo-seleccion';
 import { CampoSeleccionNumerica } from '@/componentes/comunes/campos/campo-seleccion-numerica';
 import { CampoTexto } from '@/componentes/comunes/campos/campo-texto';
@@ -22,6 +23,7 @@ export const {
     CampoAreaTexto,
     CampoEntero,
     CampoImporte,
+    CampoInterruptor,
     CampoSeleccion,
     CampoSeleccionNumerica,
   },

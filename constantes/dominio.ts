@@ -43,8 +43,18 @@ export const TIPOS_DOCUMENTO = [
 ] as const;
 export type TipoDocumento = (typeof TIPOS_DOCUMENTO)[number];
 export const LARGO_CUIT = 11;
+export const LARGO_DNI = { minimo: 7, maximo: 8 } as const;
 
-export const FORMAS_PAGO = ['contado', 'tarjeta', 'cuenta_corriente'] as const;
+export const FORMA_PAGO = {
+  contado: 'contado',
+  tarjeta: 'tarjeta',
+  cuentaCorriente: 'cuenta_corriente',
+} as const;
+export const FORMAS_PAGO = [
+  FORMA_PAGO.contado,
+  FORMA_PAGO.tarjeta,
+  FORMA_PAGO.cuentaCorriente,
+] as const;
 export type FormaPago = (typeof FORMAS_PAGO)[number];
 
 export const TIPOS_TARJETA = ['debito', 'credito'] as const;
@@ -59,13 +69,43 @@ export const ESTADOS_FACTURA = [
 ] as const;
 export type EstadoFactura = (typeof ESTADOS_FACTURA)[number];
 
+export const MEDIO_PAGO = {
+  efectivo: 'efectivo',
+  transferencia: 'transferencia',
+  tarjetaDebito: 'tarjeta_debito',
+} as const;
 export const MEDIOS_PAGO = [
-  'efectivo',
-  'transferencia',
-  'tarjeta_debito',
+  MEDIO_PAGO.efectivo,
+  MEDIO_PAGO.transferencia,
+  MEDIO_PAGO.tarjetaDebito,
+] as const;
+export type MedioPago = (typeof MEDIOS_PAGO)[number];
+
+export const MOVIMIENTO_CUENTA = {
+  debito: 'debito',
+  credito: 'credito',
+} as const;
+export const TIPOS_MOVIMIENTO_CUENTA = [
+  MOVIMIENTO_CUENTA.debito,
+  MOVIMIENTO_CUENTA.credito,
+] as const;
+export type TipoMovimientoCuenta = (typeof TIPOS_MOVIMIENTO_CUENTA)[number];
+export const SIGNO_MOVIMIENTO_CUENTA: Record<TipoMovimientoCuenta, number> = {
+  [MOVIMIENTO_CUENTA.debito]: 1,
+  [MOVIMIENTO_CUENTA.credito]: -1,
+};
+
+export const ORDEN_CLIENTES = { nombre: 'nombre', saldo: 'saldo' } as const;
+export const ORDENES_CLIENTES = [
+  ORDEN_CLIENTES.nombre,
+  ORDEN_CLIENTES.saldo,
 ] as const;
 
-export const TIPOS_MOVIMIENTO_CUENTA = ['debito', 'credito'] as const;
+export const CANTIDAD_ULTIMAS_FACTURAS = 6;
+export const SALDO_SALDADO = 0;
+
+export const PRIMER_NUMERO = 1;
+export const INCREMENTO_NUMERADOR = 1;
 
 export const PUNTO_VENTA = 1;
 export const NUMERADOR = {

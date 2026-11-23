@@ -34,3 +34,5 @@ export const COLOR_CANTIDAD = {
   salida: 'text-destructive',
   entrada: 'text-emerald-700',
 } as const;
+
+export const CLASE_NO_IMPRIMIR = 'no-imprimir';

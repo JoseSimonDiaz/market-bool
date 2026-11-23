@@ -1,28 +1,17 @@
 import { eq as esIgualA } from 'drizzle-orm';
-import { migrate } from 'drizzle-orm/libsql/migrator';
 import { ZodError } from 'zod';
 import { beforeAll, describe, expect, it as caso } from 'vitest';
 import { baseDeDatos } from '@/basedatos/conexion';
-import { productos, usuarios } from '@/basedatos/esquema';
-import { sembrar, verificarInvariantes } from '@/scripts/semilla';
+import { productos } from '@/basedatos/esquema';
+import { verificarInvariantes } from '@/scripts/semilla';
+import { prepararBaseConDatosDePrueba, sesionDe } from '@/pruebas/ayudantes';
 import type { UsuarioSesion } from '@/esquemas/usuarios';
-import { buscarUsuarioActivo } from '@/servicios/auth';
 import { ApiError } from '@/servicios/errores';
 import { editarProducto } from '@/servicios/productos';
 import { registrarMovimientoManual } from '@/servicios/stock';
 
 let admin: UsuarioSesion;
 let vendedor: UsuarioSesion;
-
-async function sesionDe(email: string) {
-  const [usuarioEncontrado] = await baseDeDatos
-    .select({ id: usuarios.id })
-    .from(usuarios)
-    .where(esIgualA(usuarios.email, email));
-  const usuarioActivo = await buscarUsuarioActivo(usuarioEncontrado.id);
-  if (!usuarioActivo) throw new Error(`Sin usuario ${email}`);
-  return usuarioActivo;
-}
 
 async function productoPorCodigo(codigo: string) {
   const [producto] = await baseDeDatos
@@ -33,8 +22,7 @@ async function productoPorCodigo(codigo: string) {
 }
 
 beforeAll(async () => {
-  await migrate(baseDeDatos, { migrationsFolder: 'basedatos/migraciones' });
-  await sembrar();
+  await prepararBaseConDatosDePrueba();
   admin = await sesionDe('admin@marketbool.test');
   vendedor = await sesionDe('vendedor@marketbool.test');
 });

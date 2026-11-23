@@ -1,10 +1,15 @@
 import {
+  MEDIO_PAGO,
   MOTIVOS_EGRESO,
   MOTIVOS_INGRESO,
   MOVIMIENTO_STOCK,
   ROL,
+  TIPO_DOCUMENTO,
+  type MedioPago,
   type Rol,
+  type TipoDocumento,
 } from '@/constantes/dominio';
+import { esquemaAltaCliente } from '@/esquemas/clientes';
 import {
   esquemaAltaProducto,
   type DatosAltaCategoria,
@@ -35,6 +40,7 @@ const { password: _campoSoloDelAltaDeUsuario, ...camposDeUsuario } =
 
 export const CAMPOS_COMUNES_PRODUCTO = camposDeProducto;
 export const CAMPOS_COMUNES_USUARIO = camposDeUsuario;
+export const CAMPOS_COMUNES_CLIENTE = esquemaAltaCliente.keyof().enum;
 
 export const CREDENCIALES_VACIAS: DatosLogin = { email: '', password: '' };
 export const PASSWORDS_VACIAS: DatosCambioPassword = { actual: '', nueva: '' };
@@ -75,4 +81,38 @@ export const MOVIMIENTO_NUEVO: Record<
     motivo: MOTIVOS_EGRESO[0],
     observacion: '',
   },
+};
+
+export type CamposComunesCliente = {
+  tipoDoc: TipoDocumento;
+  nroDoc: string;
+  nombre: string;
+  domicilio: string;
+  telefono: string;
+  email: string;
+  cuentaCorriente: boolean;
+  limiteCredito: number | null;
+};
+
+export const CLIENTE_NUEVO: CamposComunesCliente = {
+  tipoDoc: TIPO_DOCUMENTO.dni,
+  nroDoc: '',
+  nombre: '',
+  domicilio: '',
+  telefono: '',
+  email: '',
+  cuentaCorriente: false,
+  limiteCredito: null,
+};
+
+export type CamposPago = {
+  importe: number;
+  medio: MedioPago;
+  observacion: string;
+};
+
+export const PAGO_NUEVO: CamposPago = {
+  importe: Number.NaN,
+  medio: MEDIO_PAGO.efectivo,
+  observacion: '',
 };

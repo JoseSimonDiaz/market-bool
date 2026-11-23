@@ -1,6 +1,8 @@
 import {
   and as cumplenTodas,
   eq as esIgualA,
+  gte as esMayorOIgualA,
+  lt as esMenorQue,
   like as contienePatron,
   ne as esDistintoDe,
   or as cumpleAlguna,
@@ -9,6 +11,7 @@ import type { SQLiteColumn, SQLiteTable } from 'drizzle-orm/sqlite-core';
 import { baseDeDatos } from '@/basedatos/conexion';
 import { ESTADO_FILTRO, type EstadoFiltro } from '@/constantes/dominio';
 import { PRIMERA_PAGINA } from '@/constantes/url';
+import { finDiaArgentina, inicioDiaArgentina } from '@/lib/fechas';
 
 export type Paginado<Elemento> = {
   data: Elemento[];
@@ -80,4 +83,14 @@ export function condicionDeBusqueda(
   return cumpleAlguna(
     ...columnasDondeBuscar.map((columna) => contienePatron(columna, patron))
   );
+}
+
+export function condicionDesdeElDia(columnaFecha: SQLiteColumn, dia?: string) {
+  if (!dia) return undefined;
+  return esMayorOIgualA(columnaFecha, inicioDiaArgentina(dia));
+}
+
+export function condicionHastaElDia(columnaFecha: SQLiteColumn, dia?: string) {
+  if (!dia) return undefined;
+  return esMenorQue(columnaFecha, finDiaArgentina(dia));
 }
