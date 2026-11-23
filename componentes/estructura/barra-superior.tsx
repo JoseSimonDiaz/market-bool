@@ -1,3 +1,5 @@
+import { CLASE_NO_IMPRIMIR } from '@/constantes/estilos';
+import { combinarClases } from '@/lib/utils';
 import { LogOutIcon, UserIcon } from 'lucide-react';
 import { accionCerrarSesion } from '@/acciones/auth';
 import { BotonEnlace } from '@/componentes/comunes/boton-enlace';
@@ -15,7 +17,12 @@ export function BarraSuperior({
   esAdmin: boolean;
 }) {
   return (
-    <header className="no-imprimir sticky top-0 z-10 flex h-14 items-center justify-between gap-2 border-b bg-background/95 px-4 backdrop-blur">
+    <header
+      className={combinarClases(
+        CLASE_NO_IMPRIMIR,
+        'sticky top-0 z-10 flex h-14 items-center justify-between gap-2 border-b bg-background/95 px-4 backdrop-blur'
+      )}
+    >
       <MenuMovil esAdmin={esAdmin} />
       <div className="ml-auto flex items-center gap-2">
         <BotonEnlace destino={RUTAS.perfil} variant="ghost" size="sm">

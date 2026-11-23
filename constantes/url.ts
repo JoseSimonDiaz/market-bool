@@ -5,6 +5,10 @@ export const PARAMETRO_URL = {
   categoria: 'categoriaId',
   bajoMinimo: 'bajoMinimo',
   tipo: 'tipo',
+  conDeuda: 'conDeuda',
+  orden: 'orden',
+  desde: 'desde',
+  hasta: 'hasta',
 } as const;
 
 export const ARIA_PAGINA_ACTUAL = 'page';

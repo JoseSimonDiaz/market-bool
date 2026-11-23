@@ -18,6 +18,12 @@ export const MENSAJES_VALIDACION = {
   elegirCategoria: 'Elegí una categoría.',
   elegirCategoriaActiva: 'Elegí una categoría activa.',
   elegirMotivo: 'Elegí un motivo.',
+  elegirTipoDocumento: 'Elegí DNI o CUIT.',
+  dniInvalido: 'El DNI tiene 7 u 8 dígitos.',
+  cuitInvalido: 'El CUIT tiene 11 dígitos.',
+  ingresarImporte: 'Ingresá un importe.',
+  importeEnCentavos: 'El importe va en centavos.',
+  elegirMedioPago: 'Elegí un medio de pago.',
 } as const;
 
 export const MENSAJES_DESPLIEGUE = {

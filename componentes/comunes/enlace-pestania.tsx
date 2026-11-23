@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { PESTANIAS_PRODUCTOS, type Pestania } from '@/constantes/navegacion';
+import type { Pestania } from '@/constantes/navegacion';
 import { ARIA_PAGINA_ACTUAL } from '@/constantes/url';
 
-function EnlacePestania({ pestania }: { pestania: Pestania }) {
+export function EnlacePestania({ pestania }: { pestania: Pestania }) {
   const rutaActual = usePathname();
   const marcaDePaginaActual =
     rutaActual === pestania.ruta ? ARIA_PAGINA_ACTUAL : undefined;
@@ -18,19 +18,5 @@ function EnlacePestania({ pestania }: { pestania: Pestania }) {
     >
       {pestania.etiqueta}
     </Link>
-  );
-}
-
-export function PestaniasProductos() {
-  return (
-    <nav aria-label="Secciones de productos" className="border-b">
-      <ul className="-mb-px flex gap-4 overflow-x-auto">
-        {PESTANIAS_PRODUCTOS.map((pestania) => (
-          <li key={pestania.ruta}>
-            <EnlacePestania pestania={pestania} />
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 }

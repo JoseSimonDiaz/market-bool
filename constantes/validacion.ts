@@ -12,6 +12,10 @@ export const LARGO_MAXIMO = {
   descripcionProducto: 120,
   observacion: 200,
   nombreUsuario: 100,
+  nombreCliente: 120,
+  domicilio: 160,
+  telefono: 40,
+  email: 120,
 } as const;
 
 export const FORMATO_CODIGO_PRODUCTO = /^[A-Z0-9]+(-[A-Z0-9]+)*$/;
