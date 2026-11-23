@@ -16,6 +16,9 @@ export const RUTAS = {
   cuentaCliente: (id: number) => `/clientes/${id}/cuenta`,
   saldos: '/clientes/saldos',
   recibo: (id: number) => `/clientes/recibos/${id}`,
+  ventas: '/ventas',
+  nuevaVenta: '/ventas/nueva',
+  venta: (id: number) => `/ventas/${id}`,
 } as const;
 
 export const PATRONES_PAGINA = {
@@ -23,6 +26,7 @@ export const PATRONES_PAGINA = {
   cliente: `/clientes/${SEGMENTO_ID}`,
   cuentaCliente: `/clientes/${SEGMENTO_ID}/cuenta`,
   recibo: `/clientes/recibos/${SEGMENTO_ID}`,
+  venta: `/ventas/${SEGMENTO_ID}`,
 } as const;
 
 export const RUTAS_DE_ARCHIVO = {
@@ -30,6 +34,7 @@ export const RUTAS_DE_ARCHIVO = {
   cliente: '/clientes/[id]',
   cuentaCliente: '/clientes/[id]/cuenta',
   recibo: '/clientes/recibos/[id]',
+  venta: '/ventas/[id]',
 } as const;
 
 export const RUTAS_API = {
@@ -51,6 +56,10 @@ export const RUTAS_API = {
   cuentaDeCliente: `${PREFIJO_API}/clientes/${SEGMENTO_ID}/cuenta`,
   pagosDeCliente: `${PREFIJO_API}/clientes/${SEGMENTO_ID}/pagos`,
   pago: `${PREFIJO_API}/pagos/${SEGMENTO_ID}`,
+  facturas: `${PREFIJO_API}/facturas`,
+  factura: `${PREFIJO_API}/facturas/${SEGMENTO_ID}`,
+  anulacionDeFactura: `${PREFIJO_API}/facturas/${SEGMENTO_ID}/anulacion`,
+  numeracionDeFacturas: `${PREFIJO_API}/facturas/numeracion`,
 } as const;
 
 export const ALCANCE_REVALIDACION_LAYOUT = 'layout';

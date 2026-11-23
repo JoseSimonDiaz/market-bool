@@ -82,7 +82,7 @@ export const esquemaFiltroProductos = esquemaPaginacion.extend({
   q: zod.string().trim().optional(),
   categoriaId: zod.coerce.number().int().positive().optional(),
   bajoMinimo: booleanoDeUrl.default(false),
-  estado: estadoFiltroConDefecto(ESTADO_FILTRO.activos),
+  activo: estadoFiltroConDefecto(ESTADO_FILTRO.activos),
 });
 
 const cantidadMovida = zod

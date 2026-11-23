@@ -1,6 +1,5 @@
 import { z as zod } from 'zod';
 import {
-  ESTADO_FILTRO,
   LARGO_CUIT,
   LARGO_DNI,
   MEDIOS_PAGO,
@@ -14,7 +13,6 @@ import { LARGO_MAXIMO } from '@/constantes/validacion';
 import {
   booleanoDeUrl,
   esquemaPaginacion,
-  estadoFiltroConDefecto,
   fechaDia,
   textoObligatorio,
   textoOpcional,
@@ -104,7 +102,6 @@ export const esquemaFiltroClientes = esquemaPaginacion.extend({
   q: zod.string().trim().optional(),
   conDeuda: booleanoDeUrl.default(false),
   orden: zod.enum(ORDENES_CLIENTES).default(ORDEN_CLIENTES.nombre),
-  estado: estadoFiltroConDefecto(ESTADO_FILTRO.activos),
 });
 
 export const esquemaFiltroCuenta = zod.object({

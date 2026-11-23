@@ -19,3 +19,7 @@ export function finDiaArgentina(dia: string) {
   );
   return comienzoDelDiaSiguiente.toISOString();
 }
+
+export function ahoraIso() {
+  return new Date().toISOString();
+}

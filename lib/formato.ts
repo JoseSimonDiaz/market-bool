@@ -109,3 +109,13 @@ export function formatearDocumento(tipo: TipoDocumento, digitos: string) {
   if (esCuitCompleto) return formatearCuit(digitos);
   return formatoEntero.format(Number(digitos));
 }
+
+export function textoANumero(texto: string) {
+  if (!texto) return Number.NaN;
+  return Number(texto);
+}
+
+export function numeroATexto(numero: number | undefined) {
+  if (!Number.isFinite(numero)) return '';
+  return String(numero);
+}

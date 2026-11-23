@@ -30,6 +30,9 @@ const PAGINAS_DE_TODOS: string[] = [
   PATRONES_PAGINA.cliente,
   PATRONES_PAGINA.cuentaCliente,
   PATRONES_PAGINA.recibo,
+  RUTAS.ventas,
+  RUTAS.nuevaVenta,
+  PATRONES_PAGINA.venta,
 ];
 
 export const PAGINAS_POR_ROL: Record<Rol, string[]> = {
@@ -51,6 +54,9 @@ const ENDPOINTS_DE_TODOS: ReglasDeEndpoints = {
   [RUTAS_API.cuentaDeCliente]: [LEER],
   [RUTAS_API.pagosDeCliente]: [CREAR],
   [RUTAS_API.pago]: [LEER],
+  [RUTAS_API.facturas]: [LEER, CREAR],
+  [RUTAS_API.numeracionDeFacturas]: [LEER],
+  [RUTAS_API.factura]: [LEER],
 };
 
 const ENDPOINTS_DE_ADMIN: ReglasDeEndpoints = {
@@ -63,6 +69,7 @@ const ENDPOINTS_DE_ADMIN: ReglasDeEndpoints = {
   [RUTAS_API.productos]: [LEER, CREAR],
   [RUTAS_API.producto]: [LEER, MODIFICAR],
   [RUTAS_API.movimientosDeProducto]: [LEER, CREAR],
+  [RUTAS_API.anulacionDeFactura]: [CREAR],
 };
 
 export const ENDPOINTS_POR_ROL: Record<Rol, ReglasDeEndpoints> = {

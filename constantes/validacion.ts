@@ -16,6 +16,10 @@ export const LARGO_MAXIMO = {
   domicilio: 160,
   telefono: 40,
   email: 120,
+  marcaTarjeta: 40,
+  motivoAnulacion: 200,
 } as const;
 
 export const FORMATO_CODIGO_PRODUCTO = /^[A-Z0-9]+(-[A-Z0-9]+)*$/;
+export const FORMATO_DIA = /^\d{4}-\d{2}-\d{2}$/;
+export const FORMATO_ULTIMOS_DIGITOS_TARJETA = /^\d{4}$/;

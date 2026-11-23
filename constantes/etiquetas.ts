@@ -2,6 +2,7 @@ import {
   ESTADO_FACTURA,
   ESTADO_FILTRO,
   FORMA_PAGO,
+  TIPO_TARJETA,
   MEDIO_PAGO,
   MOVIMIENTO_CUENTA,
   ROL,
@@ -9,6 +10,7 @@ import {
   type EstadoFactura,
   type EstadoFiltro,
   type FormaPago,
+  type TipoTarjeta,
   type MedioPago,
   type Rol,
   type TipoDocumento,
@@ -140,3 +142,10 @@ export const ETIQUETA_ESTADO_FACTURA: Record<EstadoFactura, string> = {
   [ESTADO_FACTURA.emitida]: 'Emitida',
   [ESTADO_FACTURA.anulada]: 'Anulada',
 };
+
+export const ETIQUETA_TIPO_TARJETA: Record<TipoTarjeta, string> = {
+  [TIPO_TARJETA.debito]: 'Débito',
+  [TIPO_TARJETA.credito]: 'Crédito',
+};
+
+export const TEXTO_CONSUMIDOR_FINAL = 'Consumidor final';

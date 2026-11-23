@@ -65,9 +65,9 @@ function condicionesDeFiltro(
   usuarioActual: UsuarioSesion,
   filtros: FiltroProductos
 ) {
-  if (filtros.estado !== ESTADO_FILTRO.activos) exigirAdmin(usuarioActual);
+  if (filtros.activo !== ESTADO_FILTRO.activos) exigirAdmin(usuarioActual);
   return cumplenTodas(
-    condicionDeEstado(productos.activo, filtros.estado),
+    condicionDeEstado(productos.activo, filtros.activo),
     condicionDeBusqueda(COLUMNAS_BUSQUEDA_PRODUCTOS, filtros.q),
     filtros.categoriaId
       ? esIgualA(productos.categoriaId, filtros.categoriaId)

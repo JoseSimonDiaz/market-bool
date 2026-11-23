@@ -46,7 +46,7 @@ export default async function PaginaProductos({
         />
         {admin && (
           <FiltroUrl
-            parametro={PARAMETRO_URL.estado}
+            parametro={PARAMETRO_URL.activo}
             opciones={OPCIONES_ESTADO_SI_POR_DEFECTO_ACTIVOS}
             etiquetaSinFiltro="Solo activos"
           />

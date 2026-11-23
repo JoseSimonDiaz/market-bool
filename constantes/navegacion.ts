@@ -3,6 +3,7 @@ import {
   ArrowUpIcon,
   HomeIcon,
   PackageIcon,
+  ReceiptIcon,
   UserCogIcon,
   UsersIcon,
   type LucideIcon,
@@ -15,6 +16,7 @@ export type Pestania = { ruta: string; etiqueta: string };
 
 export const MODULOS_DE_TODOS: Modulo[] = [
   { ruta: RUTAS.inicio, etiqueta: 'Inicio', icono: HomeIcon },
+  { ruta: RUTAS.ventas, etiqueta: 'Ventas', icono: ReceiptIcon },
   { ruta: RUTAS.productos, etiqueta: 'Productos', icono: PackageIcon },
   { ruta: RUTAS.clientes, etiqueta: 'Clientes', icono: UsersIcon },
 ];

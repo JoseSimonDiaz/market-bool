@@ -8,16 +8,7 @@ import {
 import { Input } from '@/componentes/ui/input';
 import { PASO_ENTERO, VALOR_MINIMO_ENTERO } from '@/constantes/interfaz';
 import { useCampoActual } from '@/hooks/formulario/contexto';
-
-function textoANumero(texto: string) {
-  if (!texto) return Number.NaN;
-  return Number(texto);
-}
-
-function numeroATexto(numero: number | undefined) {
-  if (!Number.isFinite(numero)) return '';
-  return String(numero);
-}
+import { numeroATexto, textoANumero } from '@/lib/formato';
 
 export function CampoEntero({
   etiqueta,
