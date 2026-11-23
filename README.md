@@ -1,128 +1,126 @@
 # market-bool
 
-Sistema de gestión comercial de **market-bool**, una tienda de cartas Pokémon de un solo local: catálogo de cartas, sobres y accesorios con control de stock, facturación y cuenta corriente de clientes.
+Sistema de gestión comercial para **market-bool**, una tienda de cartas Pokémon de un solo local. Permite administrar el catálogo de cartas, sobres y accesorios con control de stock, registrar ventas con su comprobante y llevar la cuenta corriente de los clientes.
 
-2º parcial de Programación IV (TUP). Monolito Next.js: la interfaz y la API REST viven en el mismo proyecto.
+Trabajo del 2º parcial de Programación IV (TUP). Es un monolito Next.js: la interfaz y la API REST viven en el mismo proyecto.
 
-## Estado por partes
+**URL pública:** https://market-bool.vercel.app/
 
-El desarrollo se divide en 3 partes, con commits por tema dentro de cada una.
+## Integrantes
 
-| Parte | Alcance | Estado |
-| --- | --- | --- |
-| 1 | Base del proyecto, sesión, usuarios, categorías, productos y stock (RF-U, RF-P) | ✅ |
-| 2 | Clientes, cuenta corriente, pagos y ventas (RF-C, RF-V) | Pendiente |
-| 3 | Tablero (RF-T), datos de prueba completos y entrega | Pendiente |
+| Nombre | GitHub |
+| --- | --- |
+| Roldan Enzo | [@Roldanebzo](https://github.com/Roldanebzo) |
+| Diaz Jose | [@JoseSimonDiaz](https://github.com/JoseSimonDiaz) |
+
+## Funcionalidades
+
+- **Inicio:** tablero con las ventas del día y del mes, el ticket promedio, el total adeudado en cuentas corrientes y la cantidad de productos bajo el mínimo. Muestra un gráfico de ventas diarias de los últimos 30 días, otro con las ventas del mes por forma de pago y los 5 productos más vendidos del mes.
+- **Usuarios y acceso:** inicio de sesión con dos roles, administrador y vendedor. El administrador da de alta usuarios, los desactiva y restablece contraseñas; cada usuario puede cambiar la suya.
+- **Productos y stock:** catálogo con búsqueda, filtros y paginación, categorías (expansiones), ingresos y ajustes de stock con motivo, historial de movimientos y aviso de stock bajo el mínimo.
+- **Clientes:** alta y edición, ficha con las últimas facturas, cuenta corriente con saldo acumulado, registro de pagos con recibo numerado e imprimible y listado de deudores.
+- **Ventas:** nueva venta en una sola pantalla (comprador, ítems y forma de pago) que se maneja con el teclado. Se puede pagar en contado, con tarjeta o en cuenta corriente con límite de crédito. Cada venta emite una factura numerada sin huecos y con comprobante imprimible. Hay un listado de facturas con filtros, y el administrador puede anular una factura indicando el motivo.
 
 ## Stack
 
-TypeScript · Next.js 16 (App Router, Route Handlers, Server Actions) · Tailwind 4 · shadcn/ui · Drizzle ORM + drizzle-kit · SQLite en desarrollo y Turso (libSQL) en producción · Zod 4 · TanStack Form · sesión propia en cookie firmada (`jose`, `bcryptjs`) · Chart.js · Vercel.
+| Capa | Tecnología |
+| --- | --- |
+| Lenguaje | TypeScript |
+| Framework | Next.js 16 (App Router, Route Handlers y Server Actions) |
+| Estilos y componentes | Tailwind CSS 4 y shadcn/ui |
+| Gráficos | Chart.js con `react-chartjs-2` |
+| Base de datos | SQLite en desarrollo y Turso (libSQL) en producción |
+| Acceso a datos | Drizzle ORM con migraciones de `drizzle-kit` |
+| Validación y formularios | Zod 4, con los mismos esquemas en cliente y servidor, y TanStack Form |
+| Autenticación | Sesión propia en una cookie firmada (`jose`), con contraseñas hasheadas con `bcryptjs` |
+| Pruebas | Vitest para los servicios y Playwright para el navegador |
+| Hosting | Vercel |
 
-## Puesta en marcha local
+## Instalación
 
 Requiere Node 22.9 o superior y pnpm.
 
 ```bash
 pnpm install
 cp .env.example .env
-pnpm run db:migrate
-pnpm run db:seed
-pnpm run dev
+pnpm db:migrate
+pnpm db:seed
+pnpm dev
 ```
 
-Abrir http://localhost:3000 e ingresar con un usuario de prueba.
+La aplicación queda en http://localhost:3000.
 
-### Usuarios de prueba
+## Variables de entorno
+
+Están listadas en `.env.example`.
+
+| Variable | Uso |
+| --- | --- |
+| `DATABASE_URL` | En desarrollo, `file:local.db` (es el valor por defecto si queda vacía). En producción, la URL `libsql://…` de Turso. |
+| `DATABASE_AUTH_TOKEN` | Token de Turso. En desarrollo queda vacío. |
+| `SESSION_SECRET` | Clave para firmar la cookie de sesión, de 32 caracteres como mínimo. |
+| `SEED_RESET` | Opcional. En producción, al cambiar su valor, el siguiente deploy vuelve a cargar los datos de prueba. |
+
+## Datos de prueba
+
+`pnpm db:seed` carga 2 usuarios, 5 categorías, 30 productos, 10 clientes y 50 facturas repartidas en los últimos 30 días, con pagos a cuenta y una factura anulada. Las ventas, los pagos y la anulación se registran con los mismos servicios que usa la aplicación, así que el stock, los saldos y la numeración cumplen todas las reglas.
+
+## Usuarios de prueba
 
 | Rol | Email | Contraseña |
 | --- | --- | --- |
 | Administrador | `admin@marketbool.test` | `admin1234` |
 | Vendedor | `vendedor@marketbool.test` | `vendedor1234` |
 
-### Variables de entorno (`.env.example`)
-
-| Variable | Uso |
-| --- | --- |
-| `DATABASE_URL` | `file:local.db` en desarrollo; la URL `libsql://…` de Turso en producción (también se acepta `TURSO_DATABASE_URL`). |
-| `DATABASE_AUTH_TOKEN` | Token de Turso (también `TURSO_AUTH_TOKEN`). Vacío en local. |
-| `SESSION_SECRET` | Firma de la cookie de sesión, 32 caracteres como mínimo. En producción no puede ser el valor de ejemplo. |
-| `SEED_RESET` | Opcional, solo producción: si cambia su valor, el próximo deploy recarga los datos de prueba (una vez por valor). |
-
-### Scripts
+## Scripts
 
 | Script | Qué hace |
 | --- | --- |
-| `pnpm dev` | Servidor de desarrollo. |
-| `pnpm build` | Corre `scripts/desplegar.ts` y después `next build`. En Vercel Production aplica migraciones y carga los datos si la base está vacía; los previews no tocan la base. |
-| `pnpm db:generate` | Genera una migración a partir de `basedatos/esquema.ts`. |
-| `pnpm db:migrate` / `pnpm db:seed` | Aplican las migraciones y cargan los datos de prueba. |
-| `pnpm test` | Tests de servicios con vitest, sobre una base propia (`pruebas/prueba.db`). |
-| `pnpm lint` / `pnpm typecheck` | ESLint + Prettier, y TypeScript. |
+| `pnpm dev` | Levanta el servidor de desarrollo. |
+| `pnpm build` | Aplica las migraciones, carga los datos de prueba si la base está vacía y compila la aplicación. |
+| `pnpm db:migrate` | Aplica las migraciones. |
+| `pnpm db:seed` | Carga los datos de prueba. |
+| `pnpm test` | Corre las pruebas de los servicios. |
+| `pnpm test:e2e` | Corre las pruebas en el navegador. |
+| `pnpm lint` / `pnpm typecheck` | Revisan el estilo y los tipos. |
 
-## Arquitectura
-
-Cada regla de negocio vive en un único lugar: la capa de servicios (sección 10 del enunciado).
+## Organización del código
 
 ```
-basedatos/    datos: esquema (Drizzle), conexión, consultas comunes (paginado, condiciones, unicidad), migraciones
-servicios/    reglas de negocio: auth, usuarios, categorias, productos, stock, permisos, reglas-comunes, errores
-adaptadores/  HTTP y Next: rutas, acciones, sesión, páginas, traducción de errores a HTTP, cliente de la API
-app/api/      Route Handlers finos: adaptador → servicio → respuesta
-acciones/     Server Actions finas, devuelven { ok, data } | { ok: false, error }
-esquemas/     esquemas Zod compartidos por formularios y servicios (strictObject en altas y ediciones)
-lib/          utilidades puras sin dependencias de capas: formato, fechas, token, coincidencia de rutas
-constantes/   todo valor fijo: dominio, errores, mensajes, permisos por rol, rutas, http, seguridad
-app/(sistema) páginas con panel lateral y barra superior; /login queda fuera del layout
-componentes/  ui (shadcn), primitivas de maquetación, estructura, comunes (campos, filtros) y dominio
-hooks/        useFormulario (createFormHook de TanStack Form + el mismo Zod del servidor), useConfirmacion
-scripts/      semilla (datos de prueba con los servicios) y desplegar (migraciones + seed en Vercel)
-proxy.ts      autorización por rol: páginas y endpoints permitidos por rol, como en el proyecto de referencia
+basedatos/    esquema de Drizzle, conexión, consultas comunes y migraciones
+servicios/    reglas de negocio, validación y permisos (no conocen HTTP)
+adaptadores/  sesión, Route Handlers, Server Actions y traducción de errores a HTTP
+app/api/      la API REST
+app/(sistema) las pantallas del sistema, con el panel lateral
+esquemas/     esquemas Zod compartidos por los formularios y los servicios
+componentes/  componentes de interfaz y de cada módulo
+constantes/   valores fijos: roles, permisos, rutas, errores y mensajes
+lib/          utilidades puras: formato de importes y fechas, cálculos de la venta
+scripts/      carga de datos de prueba y preparación del deploy
+proxy.ts      control de acceso a páginas y endpoints según el rol
 ```
 
-- **Proxy:** el rol viaja en el JWT y `proxy.ts` lo valida contra `PAGINAS_POR_ROL` y `ENDPOINTS_POR_ROL` (`constantes/permisos.ts`). En la API responde 401 sin sesión y 403 sin permiso; en las páginas redirige a `/login` o a `/sinpermiso`.
-
-- **Servicios:** cada función recibe `(usuario, datosSinValidar)` y sigue el orden validar → permiso → reglas → resultado. Cada una cita su requerimiento (`// RF-P5`).
-- **Stock:** la existencia solo cambia en `moverStock()` (`servicios/stock.ts`). El `UPDATE … WHERE existencia + ? >= 0` y el movimiento se graban en la misma transacción; además hay un `CHECK (existencia >= 0)` en la tabla.
-- **Transacciones:** pasan por `ejecutarEnTransaccionSerializada()` (`basedatos/conexion.ts`), que encola las del mismo proceso. El driver local es sincrónico y dos transacciones simultáneas se bloquearían entre sí.
-- **Errores:** los servicios lanzan solo `ApiError(status, code, message, details)` con los códigos de la sección 11.8. Un `ZodError` se convierte en `422 VALIDACION` con el detalle por campo. Lo inesperado se registra y responde `500 ERROR_INTERNO` sin detalle.
-- **Sesión:** cookie `httpOnly` y `SameSite=Lax` firmada con HS256 (lleva id y rol). El usuario se busca en la base en cada pedido, una sola vez aunque lo pidan el layout y la página, así que uno desactivado pierde el acceso aunque conserve la cookie. Hay tres barreras: proxy (rol del token), página (usuario válido) y servicio (rol contra la base).
-- **Importes y fechas:** los importes son enteros en centavos y se muestran como `$ 12.345,50`. Las fechas se guardan en ISO UTC y se muestran en `dd/mm/aaaa`, hora de Argentina.
+- Todas las reglas de negocio están en la capa de servicios, y la usan tanto la API como las pantallas.
+- La existencia de un producto solo cambia a través de `moverStock()`. Esa función registra el movimiento en la misma transacción y nunca deja el stock en negativo.
+- El saldo de un cliente no se guarda: se calcula a partir de sus movimientos de cuenta corriente.
+- Los importes se guardan en centavos y se muestran como `$ 12.345,50`. Las fechas se muestran en `dd/mm/aaaa`, hora de Argentina.
 
 ## API REST
 
-Toda la API vive bajo `/api` y habla JSON. Hay una sola diferencia con el enunciado: **ningún segmento de ruta lleva guion**, por la regla REST del proyecto.
+La API está bajo `/api` y responde en JSON. Las listas se paginan con `page` y `pageSize` y devuelven `{ data, page, pageSize, total }`. Los errores tienen la forma `{ "error": { "code", "message", "details" } }`.
 
-| market-bool | Enunciado (sección 11) | Rol |
-| --- | --- | --- |
-| `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`, `PUT /api/auth/password` | igual | Público / ambos |
-| `GET/POST /api/usuarios`, `PATCH /api/usuarios/{id}` | igual | Admin |
-| `POST /api/usuarios/{id}/password` | `POST /api/usuarios/{id}/reset-password` | Admin |
-| `GET/POST /api/categorias`, `PATCH /api/categorias/{id}` | igual | Ambos / admin |
-| `GET/POST /api/productos`, `GET/PATCH /api/productos/{id}` | igual | Ambos / admin |
-| `GET/POST /api/productos/{id}/movimientos` | igual | Ambos / admin |
-| `GET /api/movimientos` | `GET /api/movimientos-stock` | Ambos |
-| `GET /api/facturas/numeracion` (parte 2) | `GET /api/facturas/proximo-numero` | Ambos |
+El enunciado da rutas orientativas. Las adaptamos para que ningún segmento lleve guion:
 
-Las bajas son lógicas (`PATCH` con `{"activo": false}`). Las listas paginan con `page` y `pageSize` (20 por defecto, 100 como máximo) y responden `{ data, page, pageSize, total }`. Los errores siempre tienen la forma `{ "error": { "code", "message", "details" } }`.
-
-## Requerimientos implementados (parte 1)
-
-| Código | Dónde |
+| Enunciado | market-bool |
 | --- | --- |
-| RF-U1, RF-U2 | `servicios/auth.ts`, `adaptadores/sesion.ts`, `proxy.ts`, `app/login` |
-| RF-U3 | `scripts/semilla.ts` (primer administrador) |
-| RF-U4, RF-U5 | `servicios/usuarios.ts`, `servicios/auth.ts` (`cambiarPassword`), `app/(sistema)/usuarios`, `app/(sistema)/perfil` |
-| RF-P1 a RF-P3 | `servicios/productos.ts`, `app/(sistema)/productos` |
-| RF-P4 a RF-P6 | `servicios/stock.ts` (`moverStock`), ficha del producto y pestaña Existencias |
-| RF-P7 | `servicios/categorias.ts`, `app/(sistema)/productos/categorias` |
+| `POST /api/usuarios/{id}/reset-password` | `POST /api/usuarios/{id}/password` |
+| `GET /api/movimientos-stock` | `GET /api/movimientos` |
+| `GET /api/facturas/proximo-numero` | `GET /api/facturas/numeracion` |
 
-## Publicación (Vercel + Turso)
+El resto de las rutas son las del enunciado:
 
-Se siguen los pasos de `apuntes/31.Publicar-vercel-turso`:
-
-1. Subir el repositorio a GitHub y revisar que no estén `.env` ni `local.db`.
-2. Importar el repositorio en Vercel.
-3. Crear la base en Turso, ya sea con la integración de Vercel o cargando `DATABASE_URL` y `DATABASE_AUTH_TOKEN` solo en Production.
-4. Cargar `SESSION_SECRET`, por ejemplo el resultado de `crypto.randomUUID() + crypto.randomUUID()`.
-5. Hacer Redeploy. El log muestra «Aplicando migraciones…» y «Base vacía: se cargan los datos de prueba…».
-
+- **Sesión:** `auth/login`, `auth/logout`, `auth/me` y `auth/password`.
+- **Catálogo:** `usuarios`, `categorias`, `productos` y `productos/{id}/movimientos`.
+- **Clientes:** `clientes`, `clientes/{id}/cuenta`, `clientes/{id}/pagos` y `pagos/{id}`.
+- **Ventas:** `facturas`, `facturas/{id}` y `facturas/{id}/anulacion`.
+- **Inicio:** `tablero`.

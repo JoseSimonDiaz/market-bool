@@ -50,3 +50,9 @@ export const TEXTOS_MOVIMIENTO_MANUAL = {
     boton: 'Registrar egreso',
   },
 } as const;
+
+export const TEXTO_SIN_LIMITE = 'Sin límite';
+export const SEPARADOR_DATOS = ' · ';
+export const CANTIDAD_INICIAL_RENGLON = 1;
+export const TECLA_ENTER = 'Enter';
+export const COLUMNAS_ANTES_DEL_TOTAL = 4;

@@ -1,16 +1,27 @@
+import type { VariantProps } from 'class-variance-authority';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
-import { Button } from '@/componentes/ui/button';
+import { buttonVariants as variantesDeBoton } from '@/componentes/ui/button';
+import { combinarClases } from '@/lib/utils';
+
+type PropsBotonEnlace = Omit<ComponentProps<typeof Link>, 'href'> &
+  VariantProps<typeof variantesDeBoton> & { destino: string };
 
 export function BotonEnlace({
   destino,
-  ...propsDelBoton
-}: ComponentProps<typeof Button> & { destino: string }) {
+  variant: variante,
+  size: tamanio,
+  className,
+  ...propsDelEnlace
+}: PropsBotonEnlace) {
   return (
-    <Button
-      nativeButton={false}
-      render={<Link href={destino} />}
-      {...propsDelBoton}
+    <Link
+      href={destino}
+      className={combinarClases(
+        variantesDeBoton({ variant: variante, size: tamanio }),
+        className
+      )}
+      {...propsDelEnlace}
     />
   );
 }

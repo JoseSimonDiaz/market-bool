@@ -22,6 +22,7 @@ import {
   SEPARADOR_MILES,
   ZONA_HORARIA_ARGENTINA,
 } from '@/constantes/formato';
+import { inicioDiaArgentina } from '@/lib/fechas';
 
 const formatoMoneda = new Intl.NumberFormat(LOCALE_ARGENTINA, {
   style: 'currency',
@@ -41,6 +42,11 @@ const formatoHora = new Intl.DateTimeFormat(LOCALE_ARGENTINA, {
   hourCycle: 'h23',
 });
 const formatoEntero = new Intl.NumberFormat(LOCALE_ARGENTINA);
+const formatoDiaCorto = new Intl.DateTimeFormat(LOCALE_ARGENTINA, {
+  timeZone: ZONA_HORARIA_ARGENTINA,
+  day: '2-digit',
+  month: '2-digit',
+});
 
 export function formatearMoneda(centavos: number) {
   return formatoMoneda
@@ -69,6 +75,10 @@ export function formatearEntero(numeroEntero: number) {
 
 export function formatearFecha(fechaIso: string) {
   return formatoFecha.format(new Date(fechaIso));
+}
+
+export function formatearDiaCorto(dia: string) {
+  return formatoDiaCorto.format(new Date(inicioDiaArgentina(dia)));
 }
 
 export function formatearFechaHora(fechaIso: string) {
@@ -108,4 +118,14 @@ export function formatearDocumento(tipo: TipoDocumento, digitos: string) {
     tipo === TIPO_DOCUMENTO.cuit && digitos.length === LARGO_CUIT;
   if (esCuitCompleto) return formatearCuit(digitos);
   return formatoEntero.format(Number(digitos));
+}
+
+export function textoANumero(texto: string) {
+  if (!texto) return Number.NaN;
+  return Number(texto);
+}
+
+export function numeroATexto(numero: number | undefined) {
+  if (!Number.isFinite(numero)) return '';
+  return String(numero);
 }

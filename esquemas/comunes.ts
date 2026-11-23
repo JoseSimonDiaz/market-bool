@@ -1,5 +1,6 @@
 import { z as zod } from 'zod';
 import { MENSAJES_VALIDACION } from '@/constantes/mensajes';
+import { FORMATO_DIA } from '@/constantes/validacion';
 import {
   ESTADOS_FILTRO,
   PAGINA,
@@ -43,7 +44,7 @@ export const estadoFiltroConDefecto = (estadoPorDefecto: EstadoFiltro) =>
 
 export const fechaDia = zod
   .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, MENSAJES_VALIDACION.formatoDia);
+  .regex(FORMATO_DIA, MENSAJES_VALIDACION.formatoDia);
 
 export const esquemaDetalleCampo = zod.object({
   campo: zod.string(),

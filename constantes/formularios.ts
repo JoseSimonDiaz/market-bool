@@ -1,5 +1,9 @@
 import {
+  FORMA_PAGO,
   MEDIO_PAGO,
+  TIPO_TARJETA,
+  type FormaPago,
+  type TipoTarjeta,
   MOTIVOS_EGRESO,
   MOTIVOS_INGRESO,
   MOVIMIENTO_STOCK,
@@ -116,3 +120,29 @@ export const PAGO_NUEVO: CamposPago = {
   medio: MEDIO_PAGO.efectivo,
   observacion: '',
 };
+
+export type RenglonDelFormulario = { productoId: number; cantidad: number };
+
+export type CamposVenta = {
+  clienteId: number | null;
+  items: RenglonDelFormulario[];
+  forma: FormaPago;
+  montoRecibido: number;
+  tarjetaTipo: TipoTarjeta;
+  tarjetaMarca: string;
+  tarjetaUltimos4: string;
+};
+
+export const VENTA_NUEVA: CamposVenta = {
+  clienteId: null,
+  items: [],
+  forma: FORMA_PAGO.contado,
+  montoRecibido: Number.NaN,
+  tarjetaTipo: TIPO_TARJETA.debito,
+  tarjetaMarca: '',
+  tarjetaUltimos4: '',
+};
+
+export type CamposAnulacion = { motivo: string };
+
+export const ANULACION_NUEVA: CamposAnulacion = { motivo: '' };

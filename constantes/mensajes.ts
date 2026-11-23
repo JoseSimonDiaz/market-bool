@@ -24,6 +24,12 @@ export const MENSAJES_VALIDACION = {
   ingresarImporte: 'Ingresá un importe.',
   importeEnCentavos: 'El importe va en centavos.',
   elegirMedioPago: 'Elegí un medio de pago.',
+  ventaSinItems: 'Agregá al menos un producto.',
+  clienteDadoDeBaja: 'El cliente está dado de baja.',
+  productoRepetido: 'Cada producto va en un solo renglón.',
+  ultimosDigitosTarjeta: 'Son exactamente los últimos 4 dígitos.',
+  elegirTipoTarjeta: 'Elegí débito o crédito.',
+  elegirFormaPago: 'Elegí una forma de pago.',
 } as const;
 
 export const MENSAJES_DESPLIEGUE = {

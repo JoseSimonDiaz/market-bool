@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { CREDENCIALES_VACIAS } from '@/constantes/formularios';
 import { METODO_HTTP } from '@/constantes/http';
@@ -22,11 +21,10 @@ function enviarCredenciales(credenciales: DatosLogin) {
 }
 
 export function FormularioLogin() {
-  const enrutador = useRouter();
-  const irAlInicio = useCallback(() => {
-    enrutador.replace(RUTAS.inicio);
-    enrutador.refresh();
-  }, [enrutador]);
+  const irAlInicio = useCallback(
+    () => window.location.assign(RUTAS.inicio),
+    []
+  );
   const formulario = useFormulario({
     valoresIniciales: CREDENCIALES_VACIAS,
     esquema: esquemaLogin,
