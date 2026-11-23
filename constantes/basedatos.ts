@@ -7,4 +7,5 @@ export const ALIAS_SQL = {
   conteoPorCategoria: 'productos_activos_por_categoria',
   saldosPorCliente: 'saldos_por_cliente',
   saldo: 'saldo',
+  anuladores: 'anuladores',
 } as const;

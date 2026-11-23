@@ -1,19 +1,26 @@
 import {
   ESTADO_FILTRO,
+  ESTADOS_FACTURA,
+  FORMA_PAGO,
+  FORMAS_PAGO,
   MEDIOS_PAGO,
   MOTIVOS_EGRESO,
   MOTIVOS_INGRESO,
   MOVIMIENTO_STOCK,
   ROLES,
   TIPOS_DOCUMENTO,
+  TIPOS_TARJETA,
   TIPOS_MOVIMIENTO_STOCK,
 } from '@/constantes/dominio';
 import {
+  ETIQUETA_ESTADO_FACTURA,
   ETIQUETA_ESTADO_FILTRO,
+  ETIQUETA_FORMA_PAGO,
   ETIQUETA_MEDIO_PAGO,
   ETIQUETA_MOVIMIENTO_STOCK,
   ETIQUETA_ROL,
   ETIQUETA_TIPO_DOCUMENTO,
+  ETIQUETA_TIPO_TARJETA,
 } from '@/constantes/etiquetas';
 import { aOpcionesEtiquetadas, aOpcionesTextuales } from '@/lib/opciones';
 
@@ -47,4 +54,24 @@ export const OPCIONES_TIPO_DOCUMENTO = aOpcionesEtiquetadas(
 export const OPCIONES_MEDIO_PAGO = aOpcionesEtiquetadas(
   MEDIOS_PAGO,
   ETIQUETA_MEDIO_PAGO
+);
+
+export const OPCIONES_FORMA_PAGO = aOpcionesEtiquetadas(
+  FORMAS_PAGO,
+  ETIQUETA_FORMA_PAGO
+);
+
+export const OPCIONES_ESTADO_FACTURA = aOpcionesEtiquetadas(
+  ESTADOS_FACTURA,
+  ETIQUETA_ESTADO_FACTURA
+);
+
+export const OPCIONES_TIPO_TARJETA = aOpcionesEtiquetadas(
+  TIPOS_TARJETA,
+  ETIQUETA_TIPO_TARJETA
+);
+
+export const OPCIONES_FORMA_PAGO_SIN_CUENTA_CORRIENTE = aOpcionesEtiquetadas(
+  [FORMA_PAGO.contado, FORMA_PAGO.tarjeta],
+  ETIQUETA_FORMA_PAGO
 );

@@ -57,7 +57,17 @@ export const FORMAS_PAGO = [
 ] as const;
 export type FormaPago = (typeof FORMAS_PAGO)[number];
 
-export const TIPOS_TARJETA = ['debito', 'credito'] as const;
+export const TIPO_TARJETA = { debito: 'debito', credito: 'credito' } as const;
+export const TIPOS_TARJETA = [
+  TIPO_TARJETA.debito,
+  TIPO_TARJETA.credito,
+] as const;
+export type TipoTarjeta = (typeof TIPOS_TARJETA)[number];
+export const DIGITOS_VISIBLES_TARJETA = 4;
+
+export const MOTIVO_VENTA = 'Venta';
+export const MOTIVO_ANULACION = 'Anulación de factura';
+export const IMPORTE_CERO = 0;
 
 export const ESTADO_FACTURA = {
   emitida: 'emitida',
@@ -114,8 +124,8 @@ export const NUMERADOR = {
 } as const;
 
 export const ESTADO_FILTRO = {
-  activos: 'activos',
-  inactivos: 'inactivos',
+  activos: 'true',
+  inactivos: 'false',
   todos: 'todos',
 } as const;
 export const ESTADOS_FILTRO = [
@@ -129,3 +139,7 @@ export const PAGINA = { tamanioPorDefecto: 20, tamanioMaximo: 100 } as const;
 
 export const LONGITUD_MINIMA_PASSWORD = 8;
 export const LONGITUD_MAXIMA_PASSWORD = 100;
+
+export const DIAS_VENTAS_DIARIAS = 30;
+export const CANTIDAD_MAS_VENDIDOS = 5;
+export const SIN_FACTURAS = 0;

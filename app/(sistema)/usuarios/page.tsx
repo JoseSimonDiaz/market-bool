@@ -30,7 +30,7 @@ export default async function PaginaUsuarios({
       <Fila>
         <BuscadorUrl placeholder="Buscar por nombre o email" />
         <FiltroUrl
-          parametro={PARAMETRO_URL.estado}
+          parametro={PARAMETRO_URL.activo}
           opciones={OPCIONES_ESTADO_SI_POR_DEFECTO_TODOS}
           etiquetaSinFiltro="Todos los estados"
         />

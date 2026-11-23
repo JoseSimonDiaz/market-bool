@@ -21,6 +21,7 @@ import {
   LARGO_PASSWORD_TEMPORAL,
 } from '@/constantes/seguridad';
 import { esquemaId } from '@/esquemas/comunes';
+import type { Opcion } from '@/lib/opciones';
 import {
   esquemaAltaUsuario,
   esquemaEdicionUsuario,
@@ -81,7 +82,7 @@ export async function listarUsuarios(
   exigirAdmin(usuarioActual);
   const filtro = cumplenTodas(
     condicionDeBusqueda(COLUMNAS_BUSQUEDA_USUARIOS, filtros.q),
-    condicionDeEstado(usuarios.activo, filtros.estado)
+    condicionDeEstado(usuarios.activo, filtros.activo)
   );
   return consultarPagina({
     page: filtros.page,
@@ -160,4 +161,14 @@ export async function restablecerPassword(
     .set({ passwordHash: await hashearPassword(passwordTemporal) })
     .where(esIgualA(usuarios.id, usuarioId));
   return { passwordTemporal };
+}
+
+// Listado de facturas: el filtro por vendedor ofrece a todo el personal.
+export async function listarOpcionesVendedor(
+  _usuarioActual: UsuarioSesion
+): Promise<Opcion<number>[]> {
+  return baseDeDatos
+    .select({ valor: usuarios.id, etiqueta: usuarios.nombre })
+    .from(usuarios)
+    .orderBy(ascendente(usuarios.nombre), ascendente(usuarios.id));
 }

@@ -42,11 +42,18 @@ export function MarcoCampo({
       <Label htmlFor={campo.name}>{etiqueta}</Label>
       {children}
       {mostrarAyuda && <p className="text-xs text-muted-foreground">{ayuda}</p>}
-      {mensajeDeError && (
-        <p id={`${campo.name}-error`} className="text-xs text-destructive">
-          {mensajeDeError}
-        </p>
-      )}
+      <ErrorDelCampo />
     </div>
+  );
+}
+
+export function ErrorDelCampo() {
+  const campo = useCampoActual<unknown>();
+  const mensajeDeError = useMensajeDeError();
+  if (!mensajeDeError) return null;
+  return (
+    <p id={`${campo.name}-error`} className="text-xs text-destructive">
+      {mensajeDeError}
+    </p>
   );
 }

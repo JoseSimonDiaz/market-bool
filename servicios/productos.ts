@@ -65,9 +65,9 @@ function condicionesDeFiltro(
   usuarioActual: UsuarioSesion,
   filtros: FiltroProductos
 ) {
-  if (filtros.estado !== ESTADO_FILTRO.activos) exigirAdmin(usuarioActual);
+  if (filtros.activo !== ESTADO_FILTRO.activos) exigirAdmin(usuarioActual);
   return cumplenTodas(
-    condicionDeEstado(productos.activo, filtros.estado),
+    condicionDeEstado(productos.activo, filtros.activo),
     condicionDeBusqueda(COLUMNAS_BUSQUEDA_PRODUCTOS, filtros.q),
     filtros.categoriaId
       ? esIgualA(productos.categoriaId, filtros.categoriaId)
@@ -109,6 +109,17 @@ export async function listarProductos(
     total: baseDeDatos.$count(productos, condiciones),
     buscarFilas: buscarFilasDeProductos(condiciones),
   });
+}
+
+// Indicadores: cantidad de productos activos bajo el stock mínimo.
+export function contarProductosBajoMinimo() {
+  return baseDeDatos.$count(
+    productos,
+    cumplenTodas(
+      condicionDeEstado(productos.activo, ESTADO_FILTRO.activos),
+      estaBajoMinimo
+    )
+  );
 }
 
 // Catálogo: listado con búsqueda, filtro por categoría y marca de bajo mínimo.

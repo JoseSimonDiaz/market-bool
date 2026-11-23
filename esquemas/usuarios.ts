@@ -72,7 +72,7 @@ export const esquemaEdicionUsuario = zod.strictObject({
 
 export const esquemaFiltroUsuarios = esquemaPaginacion.extend({
   q: zod.string().trim().optional(),
-  estado: estadoFiltroConDefecto(ESTADO_FILTRO.todos),
+  activo: estadoFiltroConDefecto(ESTADO_FILTRO.todos),
 });
 
 export type DatosLogin = zod.input<typeof esquemaLogin>;

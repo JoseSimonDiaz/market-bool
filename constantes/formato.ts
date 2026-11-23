@@ -22,3 +22,10 @@ export const NO_DIGITOS = /\D/g;
 
 export const LARGO_PREFIJO_CUIT = 2;
 export const LARGO_PREFIJO_Y_DNI_CUIT = 10;
+
+export const LOCALE_DIA_ISO = 'en-CA';
+export const LARGO_ANIO_Y_MES = 8;
+export const PRIMER_DIA_DEL_MES = '01';
+export const MODIFICADOR_HORARIO_ARGENTINA = '-3 hours';
+export const MINUTOS_POR_HORA = 60;
+export const MILISEGUNDOS_POR_MINUTO = 60_000;

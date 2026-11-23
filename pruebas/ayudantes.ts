@@ -4,7 +4,7 @@ import { baseDeDatos } from '@/basedatos/conexion';
 import { usuarios } from '@/basedatos/esquema';
 import { CARPETA_MIGRACIONES } from '@/constantes/basedatos';
 import { buscarUsuarioActivo } from '@/servicios/auth';
-import { sembrar } from '@/scripts/semilla';
+import { sembrarCatalogo } from '@/scripts/semilla';
 
 export async function sesionDe(email: string) {
   const [usuarioEncontrado] = await baseDeDatos
@@ -20,5 +20,5 @@ export async function prepararBaseConDatosDePrueba() {
   await aplicarMigraciones(baseDeDatos, {
     migrationsFolder: CARPETA_MIGRACIONES,
   });
-  await sembrar();
+  await sembrarCatalogo();
 }

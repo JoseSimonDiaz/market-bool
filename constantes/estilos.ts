@@ -1,3 +1,5 @@
+import { FORMA_PAGO, type FormaPago } from '@/constantes/dominio';
+
 export const ESPACIOS = {
   1: 'gap-1',
   2: 'gap-2',
@@ -36,3 +38,13 @@ export const COLOR_CANTIDAD = {
 } as const;
 
 export const CLASE_NO_IMPRIMIR = 'no-imprimir';
+
+export const COLOR_VENTAS_DIARIAS = '#dc2626';
+
+export const COLOR_FORMA_PAGO: Record<FormaPago, string> = {
+  [FORMA_PAGO.contado]: '#dc2626',
+  [FORMA_PAGO.tarjeta]: '#2563eb',
+  [FORMA_PAGO.cuentaCorriente]: '#eab308',
+};
+
+export const ALTO_GRAFICO = 'h-72';

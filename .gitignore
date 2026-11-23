@@ -27,6 +27,3 @@ graphify-out/
 
 # base de los tests
 /pruebas/prueba.db*
-AGENTS.md
-CLAUDE.md
-.claude

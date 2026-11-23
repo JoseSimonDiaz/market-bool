@@ -12,7 +12,6 @@ import {
 import { baseDeDatos } from '@/basedatos/conexion';
 import {
   condicionDeBusqueda,
-  condicionDeEstado,
   consultarPagina,
   type Paginado,
 } from '@/basedatos/consultas';
@@ -41,6 +40,7 @@ import {
   formatearNumeroComprobante,
   soloDigitos,
 } from '@/lib/formato';
+import type { Opcion } from '@/lib/opciones';
 import { crearError } from '@/servicios/errores';
 import { exigirValorUnico, hayCambios } from '@/servicios/reglas-comunes';
 
@@ -87,6 +87,8 @@ export type Cliente = Omit<FilaCliente, 'nroDocDigitos'> & { nroDoc: string };
 
 export type ListadoClientes = Paginado<Cliente> & { totalAdeudado?: number };
 
+type ListadoDeudores = Paginado<Cliente> & { totalAdeudado: number };
+
 function aCliente({ nroDocDigitos, ...cliente }: FilaCliente): Cliente {
   return {
     ...cliente,
@@ -104,7 +106,6 @@ function condicionDeBusquedaDeCliente(textoBuscado?: string) {
 
 function condicionesDeClientes(filtros: FiltroClientes) {
   return cumplenTodas(
-    condicionDeEstado(clientes.activo, filtros.estado),
     condicionDeBusquedaDeCliente(filtros.q),
     filtros.conDeuda ? esMayorQue(saldoDelCliente, SALDO_SALDADO) : undefined
   );
@@ -179,13 +180,9 @@ async function listarUltimasFacturas(clienteId: number) {
   }));
 }
 
-// Listado de clientes: búsqueda por nombre o documento, con el saldo de cada uno.
-// Saldos: los clientes con deuda, de mayor a menor, con el total adeudado.
-export async function listarClientes(
-  _usuarioActual: UsuarioSesion,
-  filtrosSinValidar: unknown
-): Promise<ListadoClientes> {
-  const filtros = esquemaFiltroClientes.parse(filtrosSinValidar);
+async function consultarListadoDeClientes(
+  filtros: FiltroClientes
+): Promise<ListadoDeudores> {
   const condiciones = condicionesDeClientes(filtros);
   const resumen = resumirClientes(condiciones);
   const pagina = await consultarPagina({
@@ -194,8 +191,48 @@ export async function listarClientes(
     total: resumen.then(({ cantidad }) => cantidad),
     buscarFilas: buscarFilasDeClientes(condiciones, filtros),
   });
-  if (!filtros.conDeuda) return pagina;
   return { ...pagina, totalAdeudado: (await resumen).totalAdeudado };
+}
+
+// Listado de clientes: búsqueda por nombre o documento, con el saldo de cada uno.
+export async function listarClientes(
+  _usuarioActual: UsuarioSesion,
+  filtrosSinValidar: unknown
+): Promise<ListadoClientes> {
+  const filtros = esquemaFiltroClientes.parse(filtrosSinValidar);
+  const { totalAdeudado, ...pagina } =
+    await consultarListadoDeClientes(filtros);
+  if (!filtros.conDeuda) return pagina;
+  return { ...pagina, totalAdeudado };
+}
+
+// Saldos: los clientes con deuda, de mayor a menor, con el total adeudado.
+export function listarDeudores(
+  _usuarioActual: UsuarioSesion,
+  filtrosSinValidar: unknown
+) {
+  const filtros = esquemaFiltroClientes.parse(filtrosSinValidar);
+  return consultarListadoDeClientes({
+    ...filtros,
+    conDeuda: true,
+    orden: ORDEN_CLIENTES.saldo,
+  });
+}
+
+// Ficha del cliente: sus datos y el saldo actual.
+export function obtenerDatosCliente(
+  _usuarioActual: UsuarioSesion,
+  idSinValidar: unknown
+) {
+  return buscarCliente(esquemaId.parse(idSinValidar));
+}
+
+// Ficha del cliente: sus últimas facturas.
+export function listarUltimasFacturasDelCliente(
+  _usuarioActual: UsuarioSesion,
+  idSinValidar: unknown
+) {
+  return listarUltimasFacturas(esquemaId.parse(idSinValidar));
 }
 
 // Ficha del cliente: sus datos, el saldo actual y las últimas facturas.
@@ -260,4 +297,14 @@ export async function editarCliente(
       .where(esIgualA(clientes.id, clienteId));
   }
   return buscarCliente(clienteId);
+}
+
+// Listado de facturas: el filtro por cliente ofrece a todos los clientes registrados.
+export async function listarOpcionesCliente(
+  _usuarioActual: UsuarioSesion
+): Promise<Opcion<number>[]> {
+  return baseDeDatos
+    .select({ valor: clientes.id, etiqueta: clientes.nombre })
+    .from(clientes)
+    .orderBy(ascendente(clientes.nombre), ascendente(clientes.id));
 }
