@@ -40,9 +40,7 @@
       "indexes": {
         "categorias_nombre_unique": {
           "name": "categorias_nombre_unique",
-          "columns": [
-            "nombre"
-          ],
+          "columns": ["nombre"],
           "isUnique": true
         }
       },
@@ -137,10 +135,7 @@
       "indexes": {
         "clientes_documento_uq": {
           "name": "clientes_documento_uq",
-          "columns": [
-            "tipo_doc",
-            "nro_doc"
-          ],
+          "columns": ["tipo_doc", "nro_doc"],
           "isUnique": true
         }
       },
@@ -219,9 +214,7 @@
       "indexes": {
         "factura_items_factura_idx": {
           "name": "factura_items_factura_idx",
-          "columns": [
-            "factura_id"
-          ],
+          "columns": ["factura_id"],
           "isUnique": false
         }
       },
@@ -230,12 +223,8 @@
           "name": "factura_items_factura_id_facturas_id_fk",
           "tableFrom": "factura_items",
           "tableTo": "facturas",
-          "columnsFrom": [
-            "factura_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["factura_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -243,12 +232,8 @@
           "name": "factura_items_producto_id_productos_id_fk",
           "tableFrom": "factura_items",
           "tableTo": "productos",
-          "columnsFrom": [
-            "producto_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["producto_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -377,24 +362,17 @@
       "indexes": {
         "facturas_numero_uq": {
           "name": "facturas_numero_uq",
-          "columns": [
-            "punto_venta",
-            "numero"
-          ],
+          "columns": ["punto_venta", "numero"],
           "isUnique": true
         },
         "facturas_fecha_idx": {
           "name": "facturas_fecha_idx",
-          "columns": [
-            "fecha"
-          ],
+          "columns": ["fecha"],
           "isUnique": false
         },
         "facturas_cliente_idx": {
           "name": "facturas_cliente_idx",
-          "columns": [
-            "cliente_id"
-          ],
+          "columns": ["cliente_id"],
           "isUnique": false
         }
       },
@@ -403,12 +381,8 @@
           "name": "facturas_cliente_id_clientes_id_fk",
           "tableFrom": "facturas",
           "tableTo": "clientes",
-          "columnsFrom": [
-            "cliente_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cliente_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -416,12 +390,8 @@
           "name": "facturas_usuario_id_usuarios_id_fk",
           "tableFrom": "facturas",
           "tableTo": "usuarios",
-          "columnsFrom": [
-            "usuario_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["usuario_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -429,12 +399,8 @@
           "name": "facturas_anulada_por_id_usuarios_id_fk",
           "tableFrom": "facturas",
           "tableTo": "usuarios",
-          "columnsFrom": [
-            "anulada_por_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["anulada_por_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -506,9 +472,7 @@
       "indexes": {
         "movimientos_cuenta_cliente_idx": {
           "name": "movimientos_cuenta_cliente_idx",
-          "columns": [
-            "cliente_id"
-          ],
+          "columns": ["cliente_id"],
           "isUnique": false
         }
       },
@@ -517,12 +481,8 @@
           "name": "movimientos_cuenta_cliente_id_clientes_id_fk",
           "tableFrom": "movimientos_cuenta",
           "tableTo": "clientes",
-          "columnsFrom": [
-            "cliente_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cliente_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -530,12 +490,8 @@
           "name": "movimientos_cuenta_factura_id_facturas_id_fk",
           "tableFrom": "movimientos_cuenta",
           "tableTo": "facturas",
-          "columnsFrom": [
-            "factura_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["factura_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -543,12 +499,8 @@
           "name": "movimientos_cuenta_pago_id_pagos_id_fk",
           "tableFrom": "movimientos_cuenta",
           "tableTo": "pagos",
-          "columnsFrom": [
-            "pago_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pago_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -634,16 +586,12 @@
       "indexes": {
         "movimientos_stock_producto_idx": {
           "name": "movimientos_stock_producto_idx",
-          "columns": [
-            "producto_id"
-          ],
+          "columns": ["producto_id"],
           "isUnique": false
         },
         "movimientos_stock_fecha_idx": {
           "name": "movimientos_stock_fecha_idx",
-          "columns": [
-            "fecha"
-          ],
+          "columns": ["fecha"],
           "isUnique": false
         }
       },
@@ -652,12 +600,8 @@
           "name": "movimientos_stock_producto_id_productos_id_fk",
           "tableFrom": "movimientos_stock",
           "tableTo": "productos",
-          "columnsFrom": [
-            "producto_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["producto_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -665,12 +609,8 @@
           "name": "movimientos_stock_usuario_id_usuarios_id_fk",
           "tableFrom": "movimientos_stock",
           "tableTo": "usuarios",
-          "columnsFrom": [
-            "usuario_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["usuario_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -678,12 +618,8 @@
           "name": "movimientos_stock_factura_id_facturas_id_fk",
           "tableFrom": "movimientos_stock",
           "tableTo": "facturas",
-          "columnsFrom": [
-            "factura_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["factura_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -787,9 +723,7 @@
       "indexes": {
         "pagos_numero_recibo_unique": {
           "name": "pagos_numero_recibo_unique",
-          "columns": [
-            "numero_recibo"
-          ],
+          "columns": ["numero_recibo"],
           "isUnique": true
         }
       },
@@ -798,12 +732,8 @@
           "name": "pagos_cliente_id_clientes_id_fk",
           "tableFrom": "pagos",
           "tableTo": "clientes",
-          "columnsFrom": [
-            "cliente_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cliente_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -811,12 +741,8 @@
           "name": "pagos_usuario_id_usuarios_id_fk",
           "tableFrom": "pagos",
           "tableTo": "usuarios",
-          "columnsFrom": [
-            "usuario_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["usuario_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -898,16 +824,12 @@
       "indexes": {
         "productos_codigo_unique": {
           "name": "productos_codigo_unique",
-          "columns": [
-            "codigo"
-          ],
+          "columns": ["codigo"],
           "isUnique": true
         },
         "productos_categoria_idx": {
           "name": "productos_categoria_idx",
-          "columns": [
-            "categoria_id"
-          ],
+          "columns": ["categoria_id"],
           "isUnique": false
         }
       },
@@ -916,12 +838,8 @@
           "name": "productos_categoria_id_categorias_id_fk",
           "tableFrom": "productos",
           "tableTo": "categorias",
-          "columnsFrom": [
-            "categoria_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["categoria_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -992,9 +910,7 @@
       "indexes": {
         "usuarios_email_unique": {
           "name": "usuarios_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
