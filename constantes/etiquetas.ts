@@ -1,8 +1,18 @@
 import {
+  ESTADO_FACTURA,
   ESTADO_FILTRO,
+  FORMA_PAGO,
+  MEDIO_PAGO,
+  MOVIMIENTO_CUENTA,
   ROL,
+  TIPO_DOCUMENTO,
+  type EstadoFactura,
   type EstadoFiltro,
+  type FormaPago,
+  type MedioPago,
   type Rol,
+  type TipoDocumento,
+  type TipoMovimientoCuenta,
   type TipoMovimientoStock,
 } from '@/constantes/dominio';
 
@@ -79,4 +89,54 @@ export const TEXTOS_ESTADO_CATEGORIA: TextosCambioEstadoEntidad = {
     descripcion: 'Vuelve a estar disponible para nuevos productos.',
     mensajeExito: 'Categoría activada.',
   },
+};
+
+export const ETIQUETA_MEDIO_PAGO: Record<MedioPago, string> = {
+  [MEDIO_PAGO.efectivo]: 'Efectivo',
+  [MEDIO_PAGO.transferencia]: 'Transferencia',
+  [MEDIO_PAGO.tarjetaDebito]: 'Tarjeta de débito',
+};
+
+export const ETIQUETA_TIPO_DOCUMENTO: Record<TipoDocumento, string> = {
+  [TIPO_DOCUMENTO.dni]: 'DNI',
+  [TIPO_DOCUMENTO.cuit]: 'CUIT',
+};
+
+export const ETIQUETA_MOVIMIENTO_CUENTA: Record<TipoMovimientoCuenta, string> =
+  {
+    [MOVIMIENTO_CUENTA.debito]: 'Débito',
+    [MOVIMIENTO_CUENTA.credito]: 'Crédito',
+  };
+
+export const TEXTOS_ESTADO_CLIENTE: TextosCambioEstadoEntidad = {
+  desactivar: {
+    accion: 'Dar de baja',
+    titulo: 'Dar de baja el cliente',
+    descripcion:
+      'Solo se puede si su saldo está en cero. Conserva su historial.',
+    mensajeExito: 'Cliente dado de baja.',
+  },
+  activar: {
+    accion: 'Reactivar',
+    titulo: 'Reactivar cliente',
+    descripcion: 'Vuelve a estar disponible para ventas y pagos.',
+    mensajeExito: 'Cliente reactivado.',
+  },
+};
+
+export const DESCRIPCION_MOVIMIENTO_CUENTA = {
+  factura: (numero: string) => `Factura ${numero}`,
+  anulacion: (numero: string) => `Anulación factura ${numero}`,
+  recibo: (numeroRecibo: string) => `Recibo ${numeroRecibo}`,
+};
+
+export const ETIQUETA_FORMA_PAGO: Record<FormaPago, string> = {
+  [FORMA_PAGO.contado]: 'Contado',
+  [FORMA_PAGO.tarjeta]: 'Tarjeta',
+  [FORMA_PAGO.cuentaCorriente]: 'Cuenta corriente',
+};
+
+export const ETIQUETA_ESTADO_FACTURA: Record<EstadoFactura, string> = {
+  [ESTADO_FACTURA.emitida]: 'Emitida',
+  [ESTADO_FACTURA.anulada]: 'Anulada',
 };
