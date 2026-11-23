@@ -27,11 +27,3 @@ graphify-out/
 
 # base de los tests
 /pruebas/prueba.db*
-AGENTS.md
-CLAUDE.md
-.claude
-
-# pruebas en el navegador
-/pruebas/navegador.db*
-/test-results/
-/playwright-report/
