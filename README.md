@@ -15,6 +15,7 @@ Trabajo del 2º parcial de Programación IV (TUP). Es un monolito Next.js: la in
 
 ## Funcionalidades
 
+- **Inicio:** tablero con las ventas del día y del mes, el ticket promedio, el total adeudado en cuentas corrientes y la cantidad de productos bajo el mínimo. Muestra un gráfico de ventas diarias de los últimos 30 días, otro con las ventas del mes por forma de pago y los 5 productos más vendidos del mes.
 - **Usuarios y acceso:** inicio de sesión con dos roles, administrador y vendedor. El administrador da de alta usuarios, los desactiva y restablece contraseñas; cada usuario puede cambiar la suya.
 - **Productos y stock:** catálogo con búsqueda, filtros y paginación, categorías (expansiones), ingresos y ajustes de stock con motivo, historial de movimientos y aviso de stock bajo el mínimo.
 - **Clientes:** alta y edición, ficha con las últimas facturas, cuenta corriente con saldo acumulado, registro de pagos con recibo numerado e imprimible y listado de deudores.
@@ -59,6 +60,10 @@ Están listadas en `.env.example`.
 | `DATABASE_AUTH_TOKEN` | Token de Turso. En desarrollo queda vacío. |
 | `SESSION_SECRET` | Clave para firmar la cookie de sesión, de 32 caracteres como mínimo. |
 | `SEED_RESET` | Opcional. En producción, al cambiar su valor, el siguiente deploy vuelve a cargar los datos de prueba. |
+
+## Datos de prueba
+
+`pnpm db:seed` carga 2 usuarios, 5 categorías, 30 productos, 10 clientes y 50 facturas repartidas en los últimos 30 días, con pagos a cuenta y una factura anulada. Las ventas, los pagos y la anulación se registran con los mismos servicios que usa la aplicación, así que el stock, los saldos y la numeración cumplen todas las reglas.
 
 ## Usuarios de prueba
 
@@ -118,3 +123,4 @@ El resto de las rutas son las del enunciado:
 - **Catálogo:** `usuarios`, `categorias`, `productos` y `productos/{id}/movimientos`.
 - **Clientes:** `clientes`, `clientes/{id}/cuenta`, `clientes/{id}/pagos` y `pagos/{id}`.
 - **Ventas:** `facturas`, `facturas/{id}` y `facturas/{id}/anulacion`.
+- **Inicio:** `tablero`.

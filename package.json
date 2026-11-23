@@ -15,8 +15,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx scripts/semilla.ts",
     "db:studio": "drizzle-kit studio",
-    "db:deploy": "tsx scripts/desplegar.ts",
-    "test:e2e": "playwright test"
+    "db:deploy": "tsx scripts/desplegar.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

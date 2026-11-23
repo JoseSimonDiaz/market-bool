@@ -7,6 +7,7 @@ export const RUTAS = {
   perfil: '/perfil',
   sinPermiso: '/sinpermiso',
   productos: '/productos',
+  productosBajoMinimo: '/productos?bajoMinimo=true',
   producto: (id: number) => `/productos/${id}`,
   categorias: '/productos/categorias',
   existencias: '/productos/movimientos',
@@ -60,6 +61,7 @@ export const RUTAS_API = {
   factura: `${PREFIJO_API}/facturas/${SEGMENTO_ID}`,
   anulacionDeFactura: `${PREFIJO_API}/facturas/${SEGMENTO_ID}/anulacion`,
   numeracionDeFacturas: `${PREFIJO_API}/facturas/numeracion`,
+  tablero: `${PREFIJO_API}/tablero`,
 } as const;
 
 export const ALCANCE_REVALIDACION_LAYOUT = 'layout';

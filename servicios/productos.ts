@@ -111,6 +111,17 @@ export async function listarProductos(
   });
 }
 
+// Indicadores: cantidad de productos activos bajo el stock mínimo.
+export function contarProductosBajoMinimo() {
+  return baseDeDatos.$count(
+    productos,
+    cumplenTodas(
+      condicionDeEstado(productos.activo, ESTADO_FILTRO.activos),
+      estaBajoMinimo
+    )
+  );
+}
+
 // Catálogo: listado con búsqueda, filtro por categoría y marca de bajo mínimo.
 export async function obtenerProducto(
   _usuarioActual: UsuarioSesion,

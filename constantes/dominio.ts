@@ -139,3 +139,7 @@ export const PAGINA = { tamanioPorDefecto: 20, tamanioMaximo: 100 } as const;
 
 export const LONGITUD_MINIMA_PASSWORD = 8;
 export const LONGITUD_MAXIMA_PASSWORD = 100;
+
+export const DIAS_VENTAS_DIARIAS = 30;
+export const CANTIDAD_MAS_VENDIDOS = 5;
+export const SIN_FACTURAS = 0;

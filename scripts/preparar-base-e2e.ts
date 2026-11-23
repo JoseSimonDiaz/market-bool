@@ -2,13 +2,13 @@ import { migrate as aplicarMigraciones } from 'drizzle-orm/libsql/migrator';
 import { baseDeDatos } from '@/basedatos/conexion';
 import { CARPETA_MIGRACIONES } from '@/constantes/basedatos';
 import { SALIDA_CON_ERROR, SALIDA_EXITOSA } from '@/constantes/scripts';
-import { sembrar } from '@/scripts/semilla';
+import { sembrarCatalogo } from '@/scripts/semilla';
 
 async function prepararBaseDePruebasDelNavegador() {
   await aplicarMigraciones(baseDeDatos, {
     migrationsFolder: CARPETA_MIGRACIONES,
   });
-  await sembrar();
+  await sembrarCatalogo();
 }
 
 prepararBaseDePruebasDelNavegador().then(

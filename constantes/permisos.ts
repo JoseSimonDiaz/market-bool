@@ -57,6 +57,7 @@ const ENDPOINTS_DE_TODOS: ReglasDeEndpoints = {
   [RUTAS_API.facturas]: [LEER, CREAR],
   [RUTAS_API.numeracionDeFacturas]: [LEER],
   [RUTAS_API.factura]: [LEER],
+  [RUTAS_API.tablero]: [LEER],
 };
 
 const ENDPOINTS_DE_ADMIN: ReglasDeEndpoints = {
