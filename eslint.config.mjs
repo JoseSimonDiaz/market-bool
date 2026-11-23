@@ -3,7 +3,6 @@ import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
-// Mismas reglas que ipacym-web (ver AGENTS.md).
 export default defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -27,7 +26,6 @@ export default defineConfig([
     },
   },
   {
-    // Componentes generados por shadcn: se dejan como los entrega la CLI.
     files: ['componentes/ui/**'],
     rules: { 'prettier/prettier': 'off' },
   },
