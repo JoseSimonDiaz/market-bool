@@ -3,7 +3,6 @@ import {
   desc as descendente,
   eq as esIgualA,
   gte as esMayorOIgualA,
-  lt as esMenorQue,
   sql as expresionSql,
   type SQL,
 } from 'drizzle-orm';
@@ -12,7 +11,12 @@ import {
   ejecutarEnTransaccionSerializada,
   type Ejecutor,
 } from '@/basedatos/conexion';
-import { consultarPagina, type Paginado } from '@/basedatos/consultas';
+import {
+  condicionDesdeElDia,
+  condicionHastaElDia,
+  consultarPagina,
+  type Paginado,
+} from '@/basedatos/consultas';
 import {
   facturas,
   movimientosStock,
@@ -31,7 +35,6 @@ import {
   esquemaMovimientoManual,
 } from '@/esquemas/productos';
 import type { UsuarioSesion } from '@/esquemas/usuarios';
-import { finDiaArgentina, inicioDiaArgentina } from '@/lib/fechas';
 import { crearError } from '@/servicios/errores';
 import { exigirAdmin } from '@/servicios/permisos';
 
@@ -151,24 +154,14 @@ export type MovimientoStock = Awaited<
   ReturnType<typeof seleccionarMovimientos>
 >[number];
 
-function condicionDesde(dia?: string) {
-  if (!dia) return undefined;
-  return esMayorOIgualA(movimientosStock.fecha, inicioDiaArgentina(dia));
-}
-
-function condicionHasta(dia?: string) {
-  if (!dia) return undefined;
-  return esMenorQue(movimientosStock.fecha, finDiaArgentina(dia));
-}
-
 function condicionesDeMovimientos(filtros: FiltrosDeMovimientos) {
   return cumplenTodas(
     filtros.productoId
       ? esIgualA(movimientosStock.productoId, filtros.productoId)
       : undefined,
     filtros.tipo ? esIgualA(movimientosStock.tipo, filtros.tipo) : undefined,
-    condicionDesde(filtros.desde),
-    condicionHasta(filtros.hasta)
+    condicionDesdeElDia(movimientosStock.fecha, filtros.desde),
+    condicionHastaElDia(movimientosStock.fecha, filtros.hasta)
   );
 }
 
