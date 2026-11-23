@@ -11,14 +11,25 @@ export const RUTAS = {
   categorias: '/productos/categorias',
   existencias: '/productos/movimientos',
   usuarios: '/usuarios',
+  clientes: '/clientes',
+  cliente: (id: number) => `/clientes/${id}`,
+  cuentaCliente: (id: number) => `/clientes/${id}/cuenta`,
+  saldos: '/clientes/saldos',
+  recibo: (id: number) => `/clientes/recibos/${id}`,
 } as const;
 
 export const PATRONES_PAGINA = {
   producto: `/productos/${SEGMENTO_ID}`,
+  cliente: `/clientes/${SEGMENTO_ID}`,
+  cuentaCliente: `/clientes/${SEGMENTO_ID}/cuenta`,
+  recibo: `/clientes/recibos/${SEGMENTO_ID}`,
 } as const;
 
 export const RUTAS_DE_ARCHIVO = {
   producto: '/productos/[id]',
+  cliente: '/clientes/[id]',
+  cuentaCliente: '/clientes/[id]/cuenta',
+  recibo: '/clientes/recibos/[id]',
 } as const;
 
 export const RUTAS_API = {
@@ -35,6 +46,11 @@ export const RUTAS_API = {
   producto: `${PREFIJO_API}/productos/${SEGMENTO_ID}`,
   movimientosDeProducto: `${PREFIJO_API}/productos/${SEGMENTO_ID}/movimientos`,
   movimientos: `${PREFIJO_API}/movimientos`,
+  clientes: `${PREFIJO_API}/clientes`,
+  cliente: `${PREFIJO_API}/clientes/${SEGMENTO_ID}`,
+  cuentaDeCliente: `${PREFIJO_API}/clientes/${SEGMENTO_ID}/cuenta`,
+  pagosDeCliente: `${PREFIJO_API}/clientes/${SEGMENTO_ID}/pagos`,
+  pago: `${PREFIJO_API}/pagos/${SEGMENTO_ID}`,
 } as const;
 
 export const ALCANCE_REVALIDACION_LAYOUT = 'layout';
