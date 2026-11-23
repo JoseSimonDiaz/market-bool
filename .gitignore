@@ -1,0 +1,32 @@
+# dependencias
+/node_modules
+/.pnp
+.pnp.*
+
+# next
+/.next/
+/out/
+/build
+next-env.d.ts
+*.tsbuildinfo
+.vercel
+
+# entorno y base local
+.env
+.env*.local
+local.db*
+
+# logs
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+
+# herramientas de IA locales
+.claude/settings.local.json
+graphify-out/
+
+# base de los tests
+/pruebas/prueba.db*
+AGENTS.md
+CLAUDE.md
+.claude
