@@ -25,6 +25,11 @@ const PAGINAS_DE_TODOS: string[] = [
   RUTAS.categorias,
   RUTAS.existencias,
   PATRONES_PAGINA.producto,
+  RUTAS.clientes,
+  RUTAS.saldos,
+  PATRONES_PAGINA.cliente,
+  PATRONES_PAGINA.cuentaCliente,
+  PATRONES_PAGINA.recibo,
 ];
 
 export const PAGINAS_POR_ROL: Record<Rol, string[]> = {
@@ -41,6 +46,11 @@ const ENDPOINTS_DE_TODOS: ReglasDeEndpoints = {
   [RUTAS_API.producto]: [LEER],
   [RUTAS_API.movimientosDeProducto]: [LEER],
   [RUTAS_API.movimientos]: [LEER],
+  [RUTAS_API.clientes]: [LEER, CREAR],
+  [RUTAS_API.cliente]: [LEER, MODIFICAR],
+  [RUTAS_API.cuentaDeCliente]: [LEER],
+  [RUTAS_API.pagosDeCliente]: [CREAR],
+  [RUTAS_API.pago]: [LEER],
 };
 
 const ENDPOINTS_DE_ADMIN: ReglasDeEndpoints = {
